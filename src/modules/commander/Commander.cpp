@@ -1369,6 +1369,8 @@ Commander::run()
 				}
 			}
 
+			_offboard_available.set_hysteresis_time_from(true, _param_com_of_loss_t.get());
+
 			param_init_forced = false;
 		}
 
@@ -3993,7 +3995,6 @@ Commander::offboard_control_update()
 		}
 	}
 
-	_offboard_available.set_hysteresis_time_from(true, _param_com_of_loss_t.get());
 	_offboard_available.set_state_and_update(
 		hrt_elapsed_time(&offboard_control_mode.timestamp) < _param_com_of_loss_t.get() * 1e6f,
 		hrt_absolute_time());
